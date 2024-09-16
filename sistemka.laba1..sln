@@ -1,25 +1,28 @@
-﻿
-Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 17
-VisualStudioVersion = 17.11.35222.181
-MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "sistemka.laba1.", "..\sistemka.laba1\sistemka.laba1\sistemka.laba1..csproj", "{1D928A14-1BC6-4CDD-88B5-322211FE2C7C}"
-EndProject
-Global
-	GlobalSection(SolutionConfigurationPlatforms) = preSolution
-		Debug|Any CPU = Debug|Any CPU
-		Release|Any CPU = Release|Any CPU
-	EndGlobalSection
-	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{1D928A14-1BC6-4CDD-88B5-322211FE2C7C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{1D928A14-1BC6-4CDD-88B5-322211FE2C7C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{1D928A14-1BC6-4CDD-88B5-322211FE2C7C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{1D928A14-1BC6-4CDD-88B5-322211FE2C7C}.Release|Any CPU.Build.0 = Release|Any CPU
-	EndGlobalSection
-	GlobalSection(SolutionProperties) = preSolution
-		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {E437B84F-25ED-4D6D-B040-75DF8BF0841C}
-	EndGlobalSection
-EndGlobal
+internal class Program
+{
+    const int multipleOfThisNumber = 14, maxArrayLength = 1000, maxValueInArray = 10000;
+    private static void Main(string[] args)
+    {
+        int[] array = new int[maxArrayLength];
+        Random r = new();
+        for (int i = 0; i < array.Length; i++)
+            array[i] = r.Next(0, maxValueInArray);
+        int max = 0, MultipleTwo = 0, MultipleSeven = 0, MultipleFourteen = 1, result = 0;
+        for (int i = 0; i < array.Length; i++)
+            if (array[i] > max) max = array[i];
+        foreach (int i in array)
+        {
+            if (i % multipleOfThisNumber == 0 && i > MultipleFourteen) MultipleFourteen = i;
+            if (i % 2 == 0) MultipleTwo = i;
+            if (i % 7 == 0) MultipleSeven = i;
+            result = MultipleTwo * MultipleSeven;
+            if (result == MultipleFourteen) break;
+        }
+        if (result == MultipleFourteen && max == MultipleFourteen)
+            Console.WriteLine($"{max} - это число соответсвует условиям задачи." +
+            $"\nОно кратно 14, а также является произведением двух других различных элементов последовательности." +
+            $"\nЭто: {MultipleTwo} и {MultipleSeven}");
+        if (result != MultipleFourteen)
+            Console.WriteLine(-1);
+    }
+}
